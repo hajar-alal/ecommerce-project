@@ -1,0 +1,40 @@
+.contact-wrapper {
+    height: 90vh;
+    background-color: #f8f6f3;
+  }
+  
+  .contact-box {
+    width: 400px;
+    padding: 40px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  }
+  
+  .title {
+    font-weight: 600;
+    color: #333;
+  }
+  
+  .form-control {
+    border-radius: 8px;
+    padding: 10px;
+    border: 1px solid #ddd;
+  }
+  
+  .form-control:focus {
+    box-shadow: none;
+    border-color: #c07f73;
+  }
+  
+  .btn-main {
+    background-color: #c07f73;
+    color: white;
+    border-radius: 8px;
+    padding: 10px;
+    font-weight: 500;
+  }
+  
+  .btn-main:hover {
+    background-color: #a96a5f;
+  }

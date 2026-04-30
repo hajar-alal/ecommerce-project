@@ -1,0 +1,28 @@
+.search-wrapper {
+    position: relative;
+    width: 250px; /* أو حسب تصميمك */
+  }
+  
+  .search-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+  
+    background: white;
+    z-index: 9999;
+  
+    border: 1px solid #ddd;
+    border-top: none;
+  
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+  
+  .search-item {
+    padding: 10px;
+    cursor: pointer;
+  }
+  
+  .search-item:hover {
+    background: #f5f5f5;
+  }

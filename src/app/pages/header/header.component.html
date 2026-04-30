@@ -1,0 +1,214 @@
+ <nav class="navbar navbar-expand-lg navbar-light nav-yellow border-bottom border-top p-0">
+    <div class="container">
+      <!-- Logo -->
+      <a class="navbar-brand fs-4 fw-bold" href="#">
+        <i class="fa fa-cart-shopping fs-4" style="color:#f54242;"></i>
+        <span class="textBlur">bigBasket</span>
+      </a>
+  
+      <!-- Toggler -->
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+      <!-- Nav Items -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 text-center">
+  
+          <!-- Home Dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link fw-semibold text-uppercase me-1 text-danger" routerLink="/home" data-bs-toggle="dropdown">
+              home
+            </a>
+            
+          </li>
+  
+          <!-- Pages Dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle redHover fw-semibold text-uppercase text-black me-1" href="#" data-bs-toggle="dropdown">
+              pages
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" routerLink="/home">Home</a></li>
+              <li><a class="dropdown-item" routerLink="/contact">Contact Us</a></li>
+             
+            </ul>
+          </li>
+  
+          <!-- Contact -->
+          <li class="nav-item">
+            <a class="nav-link fw-semibold text-uppercase text-black me-1" href="#"  routerLink="/contact">Contact us</a>
+          </li>
+  
+          <!-- Search Icon -->
+          <li class="nav-item">
+            <a class="nav-link" href="#"><i class="fa-solid fa-magnifying-glass fs-5" style="color: #0c0d0d;"></i></a>
+          </li>
+          <div class="search-wrapper">
+
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Search products..."
+              [(ngModel)]="searchText"
+              (input)="onSearch()"
+              autocomplete="off"
+              name="search"
+              id="search"
+            />
+          
+            <div *ngIf="searchResults.length > 0" class="search-dropdown">
+          
+              <div *ngFor="let item of searchResults"
+                   (click)="goToProduct(item)"
+                   class="search-item">
+          
+                {{ item.productName }}
+          
+              </div>
+          
+            </div>
+          
+          </div>
+  
+          <!-- Cart Dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+              <i class="fa fa-cart-shopping fs-5 me-1" style="color: #202122;"></i>
+            </a>
+            <ul class="dropdown-menu menuOnLeft rounded-0 mt-2">
+              @for(item of cartItems; track $index){
+              <li class="p-2">
+                <div class="d-flex w-100 border-bottom justify-content-evenly">
+                  <div>
+                    <img class="img-fluid p-2" [src]="item.productImageUrl" style="height:70px;width:100px;">
+                  </div>
+                  <div>
+                    <a href="#" class="text-decoration-none text-black fw-semibold">
+                      <p class="m-0 p-0">{{item.productName}}</p>
+                    </a>
+                    <p>1 <i class="fa-solid fa-xmark" style="color:#0d0d0d;"></i> ${{item.productPrice}}</p>
+                  </div>
+                  <button type="button" class="btn fs-5 closeBtn" (click)="removeCartProduct(item.cartId)"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+              </li>}
+              
+              <li class="p-2">
+                <div class="w-100">
+                  <div class="d-flex justify-content-between">
+                    <h6>SubTotal :</h6>
+                    <h6>$159.00</h6>
+                  </div>
+                  <div class="d-flex justify-content-evenly mt-2">
+                    <button class="btn btn-dark rounded-0 px-3">View Cart</button>
+                    <a routerLink="checkout">
+                      <button class="btn btn-danger rounded-0 px-3">Checkout</button>
+                    </a>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </li>
+  
+          <!-- User Dropdown -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle redHover fw-semibold text-uppercase text-black me-1" href="#" data-bs-toggle="dropdown">
+              <i class="fa fa-user fs-5 me-1" style="color: #202122;"></i>
+            </a>
+            <ul class="dropdown-menu" style="left:-50px;">
+              <li>
+                <div class="d-flex justify-content-evenly mt-2">
+                  <a href="#" data-bs-toggle="modal" data-bs-target="#loginModel">
+                    <button class="btn btn-danger rounded-0 px-3">Login</button>
+                  </a>
+                  <a href="#" data-bs-toggle="modal" data-bs-target="#myModal">
+                    <button class="btn btn-danger rounded-0 px-3">Register</button>
+                  </a>
+                </div>
+              </li>
+            </ul>
+          </li>
+  
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+  
+        <!-- Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Sign-up</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+  
+        <!-- Body -->
+        <div class="modal-body">
+          <div class="row">
+  
+            <div class="col-12 mb-2">
+              <label>Name</label>
+              <input type="text" class="form-control" [(ngModel)]="userRegister.Name">
+            </div>
+  
+            <div class="col-12 mb-2">
+              <label>Mobile</label>
+              <input type="text" class="form-control" [(ngModel)]="userRegister.MobileNo">
+            </div>
+  
+            <div class="col-12 mb-2">
+              <label>Password</label>
+              <input type="password" class="form-control" [(ngModel)]="userRegister.Password">
+            </div>
+  
+          </div>
+        </div>
+  
+        <!-- Footer -->
+        <div class="modal-footer">
+          <button class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+          <button class="btn btn-success" (click)="onRegister()">Sign Up</button>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+  <div class="modal fade" id="loginModel">
+    <div class="modal-dialog">
+      <div class="modal-content">
+  
+        <!-- Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">Login</h4>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+  
+        <!-- Body -->
+        <div class="modal-body">
+          <div class="row">
+  
+            <div class="col-12 mb-2">
+              <label>User Name</label>
+              <input type="text" class="form-control" [(ngModel)]="loginObj.Name">
+            </div>
+  
+            <div class="col-12 mb-2">
+              <label>Password</label>
+              <input type="text" class="form-control" [(ngModel)]="loginObj.Password">
+            </div>
+  
+  
+          </div>
+        </div>
+  
+        <!-- Footer -->
+        <div class="modal-footer">
+          <button class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+          <button class="btn btn-success" (click)="onlogin()">Login</button>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+   
